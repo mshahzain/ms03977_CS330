@@ -1,0 +1,42 @@
+module arithimetic_unit_64(
+
+	input[63:0] a ,b;
+	input C_in;
+	input [3:0] ALU_OP  \\ 4 bits
+	output reg [65:0] result;
+	output carryout);
+	
+	
+always @ (a | b | ALU_OP)
+			
+begin 
+  if (ALUOp == 4'b0000)
+    begin
+    result = a & b
+
+  end
+
+else if (ALUOp == 4'b0001)
+    begin 
+    result = a || b ;
+  end
+  
+  else if (ALUOp == 4'b0010)
+      begin
+        result = a + b ;
+        carryout = result[65];
+      end
+      
+  else if (ALUOp == 4'b0110)
+      begin
+        result = a - b;
+        carryout = result[65];
+      end
+  else if (ALUOp == 4'b1100)
+    begin
+      result = ~(a & b) ;
+    end
+      
+end
+
+
